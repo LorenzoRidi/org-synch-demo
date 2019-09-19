@@ -74,7 +74,7 @@ async function insertRecord(origin, destination, object, recordId) {
                 return Promise.resolve();
             })
             .catch((err) => {
-                console.log(err);
+                console.log('ERROR: ' + err);
                 return Promise.reject(err);
             });
     }
