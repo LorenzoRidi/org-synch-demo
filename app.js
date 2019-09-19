@@ -54,9 +54,9 @@ conn.login(username, password, (err, userInfo) => {
   if (err) {
     return console.log(err);
   }
-  console.dir(`Conectado con orgA`);
+  console.dir(`Connected to Org A`);
   conn.streaming.topic("/event/Synch__e").subscribe((message) => {
-    console.dir(`Evento 1 ${JSON.stringify(message)}`);
+    console.dir(`Event from Org A ${JSON.stringify(message)}`);
     proc.processEvent('orga', message);
   });
   return 'ok';
@@ -67,9 +67,9 @@ conn2.login(username2, password2, (err, userInfo) => {
   if (err) {
     return console.log(err);
   }
-  console.dir(`Conectado con orgB`);
+  console.dir(`Connected to orgB`);
   conn2.streaming.topic("/event/Synch__e").subscribe((message) => {
-    console.dir(`Evento 2 ${JSON.stringify(message)}`);
+    console.dir(`Evento from Org B ${JSON.stringify(message)}`);
     proc.processEvent('orgb', message);
   });
   return 'ok';
