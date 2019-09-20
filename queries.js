@@ -64,16 +64,13 @@ async function insertRecord(origin, destination, object, recordId) {
     } else if (object === 'Opportunity') {
         console.log(`INSERT Opportunity record in ${destination}`);
         
-        //console.log(`... but first, we check if related Account record exists in ${destination}!`);
-        /* return db.one(`SELECT * FROM ${origin}.opportunity RIGHT JOIN ${destination}.account ON ${origin}.opportunity.account__external_id__c = ${destination}.account.external_id__c WHERE ${origin}.opportunity.external_id__c = $1`, [recordId])
+        console.log(`... but first, we check if related Account record exists in ${destination}!`);
+        return db.one(`SELECT * FROM ${origin}.opportunity RIGHT JOIN ${destination}.account ON ${origin}.opportunity.account__external_id__c = ${destination}.account.external_id__c WHERE ${origin}.opportunity.external_id__c = $1`, [recordId])
             .then((data) => {
                 return db.none(`insert into ${destination}.Opportunity (type, systemmodstamp, stagename, sfid, probability, nextstep, name, iswon, isdeleted, id, external_id__c, createddate, closedate, amount, account__external_id__c) 
                 select type, systemmodstamp, stagename, sfid, probability, nextstep, name, iswon, isdeleted, id, external_id__c, createddate, closedate, amount, account__external_id__c 
                 from ${origin}.Opportunity where external_id__c=$1`, [recordId]);
-            }); */
-            return db.none(`insert into ${destination}.Opportunity (type, systemmodstamp, stagename, sfid, probability, nextstep, name, iswon, isdeleted, id, external_id__c, createddate, closedate, amount, account__external_id__c) 
-                select type, systemmodstamp, stagename, sfid, probability, nextstep, name, iswon, isdeleted, id, external_id__c, createddate, closedate, amount, account__external_id__c 
-                from ${origin}.Opportunity where external_id__c=$1`, [recordId])
+            })
             .then(() => {
                 return Promise.resolve();
             })
