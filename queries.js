@@ -137,7 +137,7 @@ async function updateRecordStatus(logid, schema, object, recordId, status) {
 }
 
 async function syncRecord(logid, origin, destination, operation, object, recordId) {
-    await timeout(5000);
+    await timeout(10000);
     if (operation === 'INSERT') {
         return insertRecord(origin, destination, object, recordId)
             .then(() => {
