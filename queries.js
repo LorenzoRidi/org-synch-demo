@@ -58,6 +58,7 @@ async function insertRecord(origin, destination, object, recordId) {
                 return Promise.resolve();
             })
             .catch((err) => {
+                db.none(`UPDATE ${origin}.account SET share_details__c = '${err}' WHERE ${origin}.account.external_id__c = $1`, [recordId]);
                 return Promise.reject(err);
             });
     } else if (object === 'Opportunity') {
@@ -74,7 +75,7 @@ async function insertRecord(origin, destination, object, recordId) {
                 return Promise.resolve();
             })
             .catch((err) => {
-                console.log('ERROR: ' + err);
+                db.none(`UPDATE ${origin}.opportunity SET share_details__c = '${err}' WHERE ${origin}.opportunity.external_id__c = $1`, [recordId]);
                 return Promise.reject(err);
             });
     }
@@ -96,6 +97,7 @@ async function updateRecord(origin, destination, object, recordId) {
                 return Promise.resolve();
             })
             .catch((err) => {
+                db.none(`UPDATE ${origin}.account SET share_details__c = '${err}' WHERE ${origin}.account.external_id__c = $1`, [recordId]);
                 return Promise.reject(err);
             });
     } else if (object === 'Opportunity') {
@@ -116,6 +118,7 @@ async function updateRecord(origin, destination, object, recordId) {
                 return Promise.resolve();
             })
             .catch((err) => {
+                db.none(`UPDATE ${origin}.opportunity SET share_details__c = '${err}' WHERE ${origin}.opportunity.external_id__c = $1`, [recordId]);
                 return Promise.reject(err);
             });
     }
